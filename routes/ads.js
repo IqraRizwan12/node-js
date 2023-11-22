@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Ads = require('../models/Ads')
+const verifyToken = require('../middleware/verifyToken')
 
 router.get('/', async (req, res) => {
     // get data from db
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 
 })
 
-router.post('/addData', async (req, res) => {
+router.post('/addData',verifyToken, async (req, res) => {
     // post data from db
     try{
         const ad = new Ads(req.body)
